@@ -15,16 +15,28 @@ public class IntTreeScript {
 		mid.add(-2);
 		mid.add(-25);
 		
-		System.out.println("Please input the integer to search for:");
-		System.out.print("> ");
-		String str = System.console().readLine();
-		int input = Integer.parseInt(str);
+		System.out.println("Maximum value in the tree: " + mid.getMax());
+		System.out.println("Minimum value in the tree: " + mid.getMin());
 		
-		if (mid.contains(input)) {
-			System.out.println("The number "+ input + " is in the tree");
+		boolean opLoop = true;
+		while (opLoop) {
+			System.out.println("Please input the integer to search for:");
+			System.out.print("> ");
+			String str = System.console().readLine();
+			if (str.toUpperCase().equals("EXIT")) {
+				System.exit(0);
+			}
+			int input = Integer.parseInt(str);
+			
+			if (mid.contains(input)) {
+				System.out.println("The number "+ input + " is in the tree");
+			}
+			else {
+				System.out.println("The number " + input +" is not in the tree");
+			}	
 		}
-		else {
-			System.out.println("The number " + input +" is not in the tree");
-		}
+		
+		
+		
 	}
 }
