@@ -138,28 +138,6 @@ public class IntegerTreeNode {
 		return output;		
 	}	
 	
-	/*public String toStringSimple() {
-		
-		String output = "";
-		output = output + "[" + this.value;
-		
-		if (this.left != null) {
-			output = output.concat(" [");
-			output = output.concat(this.left.toStringSimple() + "]");
-		}
-					
-		if (this.right != null) {
-				output = output.concat(" [");
-				output = output.concat(this.right.toStringSimple()+ "]");
-		}	
-		
-		if ((this.left == null) && (this.right == null)) {
-		output = output.concat("]");
-		}
-		return output;
-		
-	}*/
-	
 	public int depth() {
 		if ((this.left == null) && (this.right == null)) {
 			return 0;
@@ -183,7 +161,47 @@ public class IntegerTreeNode {
 		}
 	}
 	
-	public boolean remove(IntegerTreeNode toBeDeleted) {
-			return false;
+	public boolean remove(int toBeDeleted) {
+		IntegerTreeNode temp;
+		if (this.right.value == toBeDeleted) {
+			if (this.right.left != null) {
+				if(this.right.left.right != null){
+					this.right.left.right = this.right.right;
+				}
+				this.right = this.right.left;
+				return true;
+			}
+			else {
+				if (this.right.right.left != null) {
+					this.right.right.left = this.right.left;
+				}
+				this.right = this.right.right;
+				return true;
+			}
+		}
+		else if (this.left.value == toBeDeleted) {
+			if (this.left.right != null) {
+				if (this.left.right.left != null) {
+					this.left.right.left = this.left.left;
+				}
+				this.left = this.left.right;
+				return true;
+			}
+			else {
+				if (this.left.left.right != null) {
+					this.left.left.right = this.left.right;
+				}
+				this.left = this.left.left;
+				return true;
+			}
+		}
+		else {
+			if (toBeDeleted > this.value) {
+				return this.right.remove(toBeDeleted);
+			}
+			else {
+				return this.left.remove(toBeDeleted);
+			}
+		}
 	}
 }

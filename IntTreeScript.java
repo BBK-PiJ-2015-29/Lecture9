@@ -35,6 +35,7 @@ public class IntTreeScript {
 			System.out.println("3 - print the tree as a string showing whole tree");
 			System.out.println("4 - print the tree as a string showing only branches with value");
 			System.out.println("5 - determine the depth of the tree");
+			System.out.println("6 - remove an element from the tree");
 			System.out.println("0 - exit");
 			System.out.print("> ");
 			str1 = System.console().readLine();
@@ -75,6 +76,14 @@ public class IntTreeScript {
 					System.out.println("The depth of the tree is: " + root.depth());
 				
 					break;
+				
+				case 6:
+					System.out.println("Input value of the int to be removed:");
+					System.out.print("> ");
+					str1 = System.console().readLine();
+					int1 = Integer.parseInt(str1);
+					
+					root.remove(int1);
 				
 				case 0: 
 					System.exit(0);
