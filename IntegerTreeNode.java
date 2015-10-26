@@ -91,4 +91,55 @@ public class IntegerTreeNode {
 			return this.left.getMin();
 		}
 	}
+	
+	// toString method 
+	
+	public String toString() {
+		
+		String output = "";
+		output = output + "[" + this.value;
+		
+		if (this.left == null) {
+			output = output.concat("L []");
+			
+			
+		}else {
+			output = output.concat(" L [");
+			output = output.concat(this.left.toString() + "]");
+			
+			
+		}
+		if (this.right == null) {
+				output = output.concat(" R []]");
+			
+		}else {
+			output = output.concat("R [");
+			output = output.concat(this.right.toString()+ "]");
+		}
+		
+		return output;
+		
+	}
+	
+	public String toStringSimple() {
+		
+		String output = "";
+		output = output + "[" + this.value;
+		
+		if (this.left != null) {
+			output = output.concat(" [");
+			output = output.concat(this.left.toStringSimple() + "]");
+		}
+					
+		if (this.right != null) {
+				output = output.concat(" [");
+				output = output.concat(this.right.toStringSimple()+ "]");
+		}	
+		
+		if ((this.left == null) && (this.right == null)) {
+		output = output.concat("]");
+		}
+		return output;
+		
+	}
 }
