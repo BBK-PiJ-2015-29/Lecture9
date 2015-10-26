@@ -121,7 +121,24 @@ public class IntegerTreeNode {
 		
 	}
 	
-	public String toStringSimple() {
+	public String toStringSimple() {		
+		String output = "[" + this.value;
+		
+		if (this.left != null) {
+			output += " [" + this.left.toStringSimple() + "]";
+		}
+					
+		if (this.right != null) {
+				output += " [" + this.right.toStringSimple()+ "]";
+		}	
+		
+		if ((this.left == null) && (this.right == null)) {
+		output += "]";
+		}
+		return output;		
+	}	
+	
+	/*public String toStringSimple() {
 		
 		String output = "";
 		output = output + "[" + this.value;
@@ -141,5 +158,32 @@ public class IntegerTreeNode {
 		}
 		return output;
 		
+	}*/
+	
+	public int depth() {
+		if ((this.left == null) && (this.right == null)) {
+			return 0;
+		}
+		else 
+		{
+			int leftDepth = 0;
+			int rightDepth = 0;
+			if (this.left != null) {
+				leftDepth = 1 + this.left.depth();
+			}
+			
+			if (this.right != null) {
+				rightDepth = 1 + this.right.depth();
+			}
+			
+			if(leftDepth > rightDepth)
+				return leftDepth;
+			else
+				return rightDepth;
+		}
+	}
+	
+	public boolean remove(IntegerTreeNode toBeDeleted) {
+			return false;
 	}
 }
