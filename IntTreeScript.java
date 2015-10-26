@@ -15,12 +15,12 @@ public class IntTreeScript {
 		//testAdd(root, -2);
 		//testAdd(root, -13);
 		//testAdd(root, -25);
+		root.add(5);
 		root.add(9);
-		root.add(13);
-		root.add(123);
-		root.add(1);
-		root.add(-2);
-		root.add(-25);
+		root.add(3);
+		root.add(8);
+		root.add(11);
+		root.add(12);
 		
 		
 	
@@ -36,6 +36,7 @@ public class IntTreeScript {
 			System.out.println("4 - print the tree as a string showing only branches with value");
 			System.out.println("5 - determine the depth of the tree");
 			System.out.println("6 - remove an element from the tree");
+			System.out.println("7 - find the previous node of a given integer in the tree");
 			System.out.println("0 - exit");
 			System.out.print("> ");
 			str1 = System.console().readLine();
@@ -83,7 +84,26 @@ public class IntTreeScript {
 					str1 = System.console().readLine();
 					int1 = Integer.parseInt(str1);
 					
+					System.out.println("Tree before deletion:");
+					System.out.println(root.toStringSimple());
 					root.remove(int1);
+					System.out.println("Tree after deletion:");
+					System.out.println(root.toStringSimple());
+					
+					break;
+					
+				case 7: 
+					System.out.println("Input value of the int you want to find the parent of:");
+					System.out.print("> ");
+					str1 = System.console().readLine();
+					int1 = Integer.parseInt(str1);
+					if (root.contains(int1)) {
+						System.out.println("The parent of "+ int1 + " is:" + root.previousNode(int1).getValue());
+					}
+					else {
+						System.out.println("The number " + int1 +" is not in the tree");
+					}
+					break;
 				
 				case 0: 
 					System.exit(0);

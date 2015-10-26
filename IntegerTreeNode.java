@@ -96,40 +96,44 @@ public class IntegerTreeNode {
 	
 	public String toString() {
 		
+		return "[" + prettyPrint() + "]";
+		
+	}
+	public String prettyPrint() {
 		String output = "";
-		output = output + "[" + this.value;
+		output = output + this.value;
 		
 		if (this.left == null) {
-			output = output.concat("L []");
+			output = output.concat(" L[]");
 			
 			
 		}else {
-			output = output.concat(" L [");
-			output = output.concat(this.left.toString() + "]");
+			output = output.concat(" L[");
+			output = output.concat(this.left.prettyPrint() + "]");
 			
 			
 		}
 		if (this.right == null) {
-				output = output.concat(" R []]");
+				output = output.concat(" R[]");
 			
 		}else {
-			output = output.concat("R [");
-			output = output.concat(this.right.toString()+ "]");
+			output = output.concat(" R[");
+			output = output.concat(this.right.prettyPrint()+ "]");
 		}
 		
 		return output;
-		
 	}
 	
-	public String toStringSimple() {		
-		String output = "[" + this.value;
+	public String toStringSimple() {
+		String output = "";
+		output = output + this.value;
 		
 		if (this.left != null) {
 			output += " [" + this.left.toStringSimple() + "]";
 		}
 					
 		if (this.right != null) {
-				output += " [" + this.right.toStringSimple()+ "]";
+			output += " [" + this.right.toStringSimple()+ "]";
 		}	
 		
 		if ((this.left == null) && (this.right == null)) {
@@ -138,12 +142,12 @@ public class IntegerTreeNode {
 		return output;		
 	}	
 	
+	
 	public int depth() {
 		if ((this.left == null) && (this.right == null)) {
 			return 0;
 		}
-		else 
-		{
+		else {
 			int leftDepth = 0;
 			int rightDepth = 0;
 			if (this.left != null) {
@@ -160,7 +164,62 @@ public class IntegerTreeNode {
 				return rightDepth;
 		}
 	}
+	//remove method - second attempt
 	
+	public boolean remove (int toBeDeleted) {
+		// toBeDeleted is the root
+			
+		int temp;
+		if (this.value == toBeDeleted) {
+			if (right != null) {
+				temp = right.getMin();
+				previousNode(getMin()).left = null;
+				this.value = temp;
+				return true;
+			}
+			else if (this.left != null) {
+				temp = left.getMax();
+				previousNode(getMax()).right = null;
+				this.value = temp;
+				return true;
+			}
+			else {
+				System.out.println("Target int not found");
+				return false;
+			}
+		}
+		else {
+			if ((toBeDeleted > this.value) && (this.right != null)) {
+				right.remove(toBeDeleted);
+			}
+			else if ((this.left != null)) {
+				left.remove(toBeDeleted);
+			}
+		}
+		
+		return false;
+	}
+	
+	//find the node before the minimum
+	
+	public IntegerTreeNode previousNode(int value) {
+	
+		if (this.right != null && this.left != null) {
+			if ((this.right.value == value) || (this.left.value == value)) {
+				return this;
+			}
+			else if (value < this.value) {
+				return this.left.previousNode(value);			
+			}
+			else {
+				return this.right.previousNode(value);
+			}
+		}
+		return this;
+	}
+
+	//remove method - first attempt
+	/*
 	public boolean remove(int toBeDeleted) {
 		IntegerTreeNode temp;
 		if (this.right.value == toBeDeleted) {
@@ -203,5 +262,5 @@ public class IntegerTreeNode {
 				return this.left.remove(toBeDeleted);
 			}
 		}
-	}
+	}*/
 }
